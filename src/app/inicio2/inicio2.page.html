@@ -1,0 +1,51 @@
+<ion-menu contentId="main-content" side="start" type="overlay">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list lines="none">
+      <ion-item button (click)="openPage('scan')" class="menu-item">
+        <ion-icon name="qr-code-outline" slot="start"></ion-icon>
+        Escanear QR
+      </ion-item>
+      <ion-item button (click)="openPage('about')" class="menu-item">
+        <ion-icon name="information-circle-outline" slot="start"></ion-icon>
+        About
+      </ion-item>
+      <ion-item button (click)="logout()" class="menu-item">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        Cerrar Sesión
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>!Bienvenid@¡{{ username }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" id="main-content">
+  <ion-card *ngIf="feriadosData">
+    <ion-card-header>
+      <strong>¡Planifica tu tiempo libre con anticipación! A continuación, te presentamos la lista de los próximos feriados:</strong>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-card *ngFor="let feriado of feriadosData" class="plomito">
+        <ion-card-header>
+          <strong>{{ feriado.nombre }}</strong>
+        </ion-card-header>
+        <ion-card-content>
+          Fecha: {{ feriado.fecha }}<br>
+          Tipo: {{ feriado.tipo }}
+        </ion-card-content>
+      </ion-card>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

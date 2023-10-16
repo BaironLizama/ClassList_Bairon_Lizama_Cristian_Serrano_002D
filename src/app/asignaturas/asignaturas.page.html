@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Asignaturas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Asignaturas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Nombre de la asignatura</ion-label>
+        <ion-input [(ngModel)]="nuevaAsignatura.nombre" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Descripción de la asignatura</ion-label>
+        <ion-textarea [(ngModel)]="nuevaAsignatura.descripcion"></ion-textarea>
+      </ion-item>
+      <ion-button expand="full" (click)="agregarAsignatura()">Agregar Asignatura</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="asignaturaParaEditar">
+    <ion-card-header>
+      Editar Asignatura
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="stacked">Nombre de la asignatura</ion-label>
+        <ion-input [(ngModel)]="asignaturaParaEditar.nombre" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Descripción de la asignatura</ion-label>
+        <ion-textarea [(ngModel)]="asignaturaParaEditar.descripcion"></ion-textarea>
+      </ion-item>
+      <ion-button expand="full" (click)="guardarCambiosAsignatura()">Guardar Cambios</ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngFor="let asignatura of asignaturas">
+    <ion-card-header>
+      {{ asignatura.nombre }}
+    </ion-card-header>
+    <ion-card-content>
+      {{ asignatura.descripcion }}
+    </ion-card-content>
+    <ion-button *ngIf="!asignaturaParaEditar || asignatura.id !== asignaturaParaEditar.id" (click)="editarAsignatura(asignatura)">Editar</ion-button>
+    <ion-button (click)="borrarAsignatura(asignatura)">Borrar Asignatura</ion-button>
+  </ion-card>
+</ion-content>
